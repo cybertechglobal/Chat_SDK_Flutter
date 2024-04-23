@@ -1,3 +1,5 @@
+import 'package:chat_sdk_flutter/brrm_group.dart';
+import 'package:chat_sdk_flutter/brrm_user.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -22,7 +24,22 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    //c initPlatformState();
+
+    String appToken =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiMTg2MjQxLWQ2YzktNDdmZS05NWZiLTEyYmJiOTE3ZjkwYiIsImlhdCI6MTY5OTUyOTE5MX0.KGfgNuJADwDh_ODeEIPnE-HSxNCuEpeDrtNEs9yBHQw';
+
+    _chatSdkFlutterPlugin.setAppToken(appToken);
+
+    BrrmUser user = BrrmUser(
+        id: '10eb325e-1299-4901-96ca-a6e7fb235cbd',
+        email: 'ios@myauto.com',
+        name: 'IOS');
+    _chatSdkFlutterPlugin.setUser(user);
+
+    BrrmGroup group = BrrmGroup(
+        id: 'e92d4539-25ca-4a19-b0fc-34d6e9ba08d8', name: 'CHAT TEST');
+    _chatSdkFlutterPlugin.setGroup(group);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -31,8 +48,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _chatSdkFlutterPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _chatSdkFlutterPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -55,8 +72,15 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+            child: TextButton(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+          ),
+          onPressed: () {
+            _chatSdkFlutterPlugin.openChat();
+          },
+          child: const Text('Open Chat'),
+        )),
       ),
     );
   }

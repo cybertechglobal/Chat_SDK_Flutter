@@ -1,3 +1,5 @@
+import 'package:chat_sdk_flutter/brrm_group.dart';
+import 'package:chat_sdk_flutter/brrm_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:chat_sdk_flutter/chat_sdk_flutter.dart';
 import 'package:chat_sdk_flutter/chat_sdk_flutter_platform_interface.dart';
@@ -10,6 +12,26 @@ class MockChatSdkFlutterPlatform
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  void openChat() {
+    // TODO: implement openChat
+  }
+
+  @override
+  void setAppToken(String appToken) {
+    // TODO: implement setAppToken
+  }
+
+  @override
+  void setGroup(BrrmGroup group) {
+    // TODO: implement setGroup
+  }
+
+  @override
+  void setUser(BrrmUser user) {
+    // TODO: implement setUser
+  }
 }
 
 void main() {

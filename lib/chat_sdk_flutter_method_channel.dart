@@ -1,3 +1,5 @@
+import 'package:chat_sdk_flutter/brrm_group.dart';
+import 'package:chat_sdk_flutter/brrm_user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +13,36 @@ class MethodChannelChatSdkFlutter extends ChatSdkFlutterPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  @override
+  void setAppToken(String appToken) {
+    methodChannel
+        .invokeMethod<String>(Methods.initChat, {'appToken': appToken});
+  }
+
+  @override
+  void setUser(BrrmUser user) {
+    methodChannel.invokeMethod<String>(Methods.setUser, user.toJson());
+  }
+
+  @override
+  void setGroup(BrrmGroup group) {
+    methodChannel.invokeMethod<String>(Methods.setGroup, group.toJson());
+  }
+
+  @override
+  void openChat() {
+    methodChannel.invokeMethod<String>(Methods.openChat);
+  }
+}
+
+class Methods {
+  static String initChat = 'initChat';
+  static String setUser = 'setUser';
+  static String setGroup = 'setGroup';
+  static String openChat = 'openChat';
 }
