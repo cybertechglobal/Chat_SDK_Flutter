@@ -48,4 +48,9 @@ abstract class ChatSdkFlutterPlatform extends PlatformInterface {
   void setFMCToken(String fmcToken) {
     throw UnimplementedError('setFMCToken() has not been implemented.');
   }
+
+  void notificationReceived(Map<String, dynamic> notification) {
+    throw UnimplementedError(
+        'notificationReceived() has not been implemented.');
+  }
 }

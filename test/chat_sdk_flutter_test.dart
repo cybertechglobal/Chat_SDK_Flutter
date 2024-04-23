@@ -37,6 +37,11 @@ class MockChatSdkFlutterPlatform
   void setFMCToken(String fmcToken) {
     // TODO: implement setFMCToken
   }
+  
+  @override
+  void notificationReceived(Map<String, dynamic> notification) {
+    // TODO: implement notificationReceived
+  }
 }
 
 void main() {

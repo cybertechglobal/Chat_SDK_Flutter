@@ -44,6 +44,13 @@ class MethodChannelChatSdkFlutter extends ChatSdkFlutterPlatform {
     methodChannel
         .invokeMethod<String>(Methods.setFMCToken, {'FCMToken': fmcToken});
   }
+
+  @override
+  void notificationReceived(Map<String, dynamic> notification) {
+    // Meni na se ne prikazuje notifikacija ne znam iz kog razloga iako tu notifikaciju pravim u sam framework a metoda se poziva...
+    methodChannel.invokeMethod<String>(
+        Methods.notificationReceived, notification);
+  }
 }
 
 class Methods {
@@ -52,4 +59,5 @@ class Methods {
   static String setGroup = 'setGroup';
   static String openChat = 'openChat';
   static String setFMCToken = 'setFCMToken';
+  static String notificationReceived = 'notificationReceived';
 }

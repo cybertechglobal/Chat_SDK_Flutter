@@ -27,4 +27,8 @@ class ChatSdkFlutter {
   void setFMCToken(String token) {
     ChatSdkFlutterPlatform.instance.setFMCToken(token);
   }
+
+  void notificationReceived(Map<String, dynamic> notification) {
+    ChatSdkFlutterPlatform.instance.notificationReceived(notification);
+  }
 }

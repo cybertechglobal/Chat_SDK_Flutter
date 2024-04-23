@@ -34,6 +34,12 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
         case Methods.SET_FCM_TOKEN.rawValue:
             guard let args = call.arguments as? [String: Any], let fcmToken = args["FCMToken"] as? String else { return }
             BrrmChat.shared.setFMCToken(fmcToken: fcmToken)
+        case Methods.NOTIFICATION_RECEIVED.rawValue:
+            guard let args = call.arguments as? [String: Any] else { return }
+            if BrrmChat.shared.isBrrmChatNotification(userInfo: args){
+                BrrmChat.shared.notification(userInfo: args)
+            }
+           
         default:
             result(FlutterMethodNotImplemented)
         }
@@ -46,4 +52,5 @@ enum Methods: String {
     case SET_GROUP = "setGroup"
     case OPEN_CHAT = "openChat"
     case SET_FCM_TOKEN = "setFCMToken"
+    case NOTIFICATION_RECEIVED = "notificationReceived"
 }
