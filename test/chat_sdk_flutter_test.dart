@@ -1,5 +1,5 @@
-import 'package:chat_sdk_flutter/brrm_group.dart';
-import 'package:chat_sdk_flutter/brrm_user.dart';
+import 'package:chat_sdk_flutter/models/brrm_group.dart';
+import 'package:chat_sdk_flutter/models/brrm_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:chat_sdk_flutter/chat_sdk_flutter.dart';
 import 'package:chat_sdk_flutter/chat_sdk_flutter_platform_interface.dart';
@@ -31,6 +31,11 @@ class MockChatSdkFlutterPlatform
   @override
   void setUser(BrrmUser user) {
     // TODO: implement setUser
+  }
+  
+  @override
+  void setFMCToken(String fmcToken) {
+    // TODO: implement setFMCToken
   }
 }
 

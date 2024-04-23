@@ -1,5 +1,6 @@
-import 'package:chat_sdk_flutter/brrm_group.dart';
-import 'package:chat_sdk_flutter/brrm_user.dart';
+
+import 'package:chat_sdk_flutter/models/brrm_group.dart';
+import 'package:chat_sdk_flutter/models/brrm_user.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -40,6 +41,8 @@ class _MyAppState extends State<MyApp> {
     BrrmGroup group = BrrmGroup(
         id: 'e92d4539-25ca-4a19-b0fc-34d6e9ba08d8', name: 'CHAT TEST');
     _chatSdkFlutterPlugin.setGroup(group);
+
+    _chatSdkFlutterPlugin.setFMCToken("token");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.

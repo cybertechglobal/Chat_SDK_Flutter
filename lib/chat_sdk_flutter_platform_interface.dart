@@ -1,5 +1,5 @@
-import 'package:chat_sdk_flutter/brrm_group.dart';
-import 'package:chat_sdk_flutter/brrm_user.dart';
+import 'package:chat_sdk_flutter/models/brrm_group.dart';
+import 'package:chat_sdk_flutter/models/brrm_user.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'chat_sdk_flutter_method_channel.dart';
@@ -43,5 +43,9 @@ abstract class ChatSdkFlutterPlatform extends PlatformInterface {
 
   void openChat() {
     throw UnimplementedError('openChat() has not been implemented.');
+  }
+
+  void setFMCToken(String fmcToken) {
+    throw UnimplementedError('setFMCToken() has not been implemented.');
   }
 }

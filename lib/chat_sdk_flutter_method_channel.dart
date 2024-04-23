@@ -1,5 +1,5 @@
-import 'package:chat_sdk_flutter/brrm_group.dart';
-import 'package:chat_sdk_flutter/brrm_user.dart';
+import 'package:chat_sdk_flutter/models/brrm_group.dart';
+import 'package:chat_sdk_flutter/models/brrm_user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -38,6 +38,12 @@ class MethodChannelChatSdkFlutter extends ChatSdkFlutterPlatform {
   void openChat() {
     methodChannel.invokeMethod<String>(Methods.openChat);
   }
+
+  @override
+  void setFMCToken(String fmcToken) {
+    methodChannel
+        .invokeMethod<String>(Methods.setFMCToken, {'FCMToken': fmcToken});
+  }
 }
 
 class Methods {
@@ -45,4 +51,5 @@ class Methods {
   static String setUser = 'setUser';
   static String setGroup = 'setGroup';
   static String openChat = 'openChat';
+  static String setFMCToken = 'setFCMToken';
 }

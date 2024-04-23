@@ -1,5 +1,5 @@
-import 'package:chat_sdk_flutter/brrm_group.dart';
-import 'package:chat_sdk_flutter/brrm_user.dart';
+import 'package:chat_sdk_flutter/models/brrm_group.dart';
+import 'package:chat_sdk_flutter/models/brrm_user.dart';
 
 import 'chat_sdk_flutter_platform_interface.dart';
 
@@ -22,5 +22,9 @@ class ChatSdkFlutter {
 
   void openChat() {
     ChatSdkFlutterPlatform.instance.openChat();
+  }
+
+  void setFMCToken(String token) {
+    ChatSdkFlutterPlatform.instance.setFMCToken(token);
   }
 }
