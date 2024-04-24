@@ -1,58 +1,67 @@
 import 'package:chat_sdk_flutter/models/brrm_group.dart';
 import 'package:chat_sdk_flutter/models/brrm_user.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chat_sdk_flutter/chat_sdk_flutter.dart';
-import 'package:chat_sdk_flutter/chat_sdk_flutter_platform_interface.dart';
-import 'package:chat_sdk_flutter/chat_sdk_flutter_method_channel.dart';
+import 'package:chat_sdk_flutter/brrm_chat_plugin_interface.dart';
+import 'package:chat_sdk_flutter/brrm_chat_plugin.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockChatSdkFlutterPlatform
     with MockPlatformInterfaceMixin
     implements ChatSdkFlutterPlatform {
-
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  void openChat() {
-    // TODO: implement openChat
+  Future openChat() {
+    throw UnimplementedError();
   }
 
   @override
-  void setAppToken(String appToken) {
-    // TODO: implement setAppToken
+  Future initChat(String appToken) {
+    throw UnimplementedError();
   }
 
   @override
-  void setGroup(BrrmGroup group) {
-    // TODO: implement setGroup
+  Future setGroup(BrrmGroup group) {
+    throw UnimplementedError();
   }
 
   @override
-  void setUser(BrrmUser user) {
-    // TODO: implement setUser
+  Future setUser(BrrmUser user) {
+    throw UnimplementedError();
   }
-  
+
   @override
-  void setFMCToken(String fmcToken) {
-    // TODO: implement setFMCToken
+  Future setFCMToken(String fmcToken) {
+    throw UnimplementedError();
   }
-  
+
   @override
-  void notificationReceived(Map<String, dynamic> notification) {
-    // TODO: implement notificationReceived
+  Future notificationReceived(Map<dynamic, dynamic> notification) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future handleBrrmChatMessage(Map<dynamic, dynamic> data) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future isBrrmChatMessage(Map<dynamic, dynamic> data) {
+    throw UnimplementedError();
   }
 }
 
 void main() {
-  final ChatSdkFlutterPlatform initialPlatform = ChatSdkFlutterPlatform.instance;
+  final ChatSdkFlutterPlatform initialPlatform =
+      ChatSdkFlutterPlatform.instance;
 
-  test('$MethodChannelChatSdkFlutter is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelChatSdkFlutter>());
+  test('$BrrmChatPlugin is the default instance', () {
+    expect(initialPlatform, isInstanceOf<BrrmChatPlugin>());
   });
 
   test('getPlatformVersion', () async {
-    ChatSdkFlutter chatSdkFlutterPlugin = ChatSdkFlutter();
+    final chatSdkFlutterPlugin = BrrmChatPlugin();
     MockChatSdkFlutterPlatform fakePlatform = MockChatSdkFlutterPlatform();
     ChatSdkFlutterPlatform.instance = fakePlatform;
 
