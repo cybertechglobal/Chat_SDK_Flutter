@@ -16,6 +16,7 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
             guard let args = call.arguments as? [String: Any] else { return }
             guard let token = args["appToken"] as? String else { return }
             BrrmChat.shared.setToken(applicationToken: token)
+            result(true)
         case Methods.SET_USER.rawValue:
             guard let args = call.arguments as? [String: Any] else { return }
             guard let userId = args["id"] as? String,
@@ -23,22 +24,28 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
                   let name = args["name"] as? String else { return }
             let chatUser = BrrmUser(id: userId, email: email, name: name)
             BrrmChat.shared.setUser(user: chatUser)
+            result(true)
         case Methods.SET_GROUP.rawValue:
             guard let args = call.arguments as? [String: Any] else { return }
             guard let groupId = args["id"] as? String,
                   let chatName = args["name"] as? String else { return }
             let group = BrrmGroup(id: groupId, name: chatName)
             BrrmChat.shared.setGroup(group: group)
+            result(true)
         case Methods.OPEN_CHAT.rawValue:
             BrrmChat.shared.openChatList()
+            result(true)
         case Methods.SET_FCM_TOKEN.rawValue:
             guard let args = call.arguments as? [String: Any], let fcmToken = args["FCMToken"] as? String else { return }
             BrrmChat.shared.setFMCToken(fmcToken: fcmToken)
+            result(true)
         case Methods.NOTIFICATION_RECEIVED.rawValue:
             guard let args = call.arguments as? [String: Any] else { return }
             if BrrmChat.shared.isBrrmChatNotification(userInfo: args){
                 BrrmChat.shared.notification(userInfo: args)
+                result(true)
             }
+            result(false)
            
         default:
             result(FlutterMethodNotImplemented)
