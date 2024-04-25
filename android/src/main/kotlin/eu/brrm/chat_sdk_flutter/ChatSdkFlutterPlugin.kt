@@ -54,7 +54,7 @@ class ChatSdkFlutterPlugin : FlutterPlugin, MethodCallHandler {
             }
 
             Methods.IS_BRRM_CHAT_MESSAGE -> {
-                isBrrmChatMessage(call)
+                isBrrmChatMessage(call, result)
                 result.success(true)
             }
 
@@ -63,9 +63,7 @@ class ChatSdkFlutterPlugin : FlutterPlugin, MethodCallHandler {
             }
 
             Methods.NOTIFICATION_RECEIVED -> {
-                if (isBrrmChatMessage(call)) {
-                    handleBrrmChatMessage(call, result)
-                }
+                handleBrrmChatMessage(call, result)
             }
 
             else -> {
@@ -83,9 +81,10 @@ class ChatSdkFlutterPlugin : FlutterPlugin, MethodCallHandler {
         result.success(true)
     }
 
-    private fun isBrrmChatMessage(call: MethodCall): Boolean {
+    private fun isBrrmChatMessage(call: MethodCall, result: Result) {
         val data = call.arguments as? Map<*, *>
-        return data?.let { return@let BrrmChat.instance.isBrrmChatMessage(it) } ?: false
+        val isBrrmChatMessage = data?.let { BrrmChat.instance.isBrrmChatMessage(it) } ?: false
+        result.success(isBrrmChatMessage)
     }
 
     private fun setUser(call: MethodCall, result: Result) {
