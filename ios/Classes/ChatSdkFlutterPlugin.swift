@@ -41,11 +41,17 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
             result(true)
         case Methods.NOTIFICATION_RECEIVED.rawValue:
             guard let args = call.arguments as? [String: Any] else { return }
-            if BrrmChat.shared.isBrrmChatNotification(userInfo: args){
+            if BrrmChat.shared.isBrrmChatNotification(userInfo: args) {
                 BrrmChat.shared.notification(userInfo: args)
                 result(true)
             }
             result(false)
+        case Methods.IS_BRRM_CHAT_MESSAGE.rawValue:
+            guard let args = call.arguments as? [String: Any] else { 
+                result(false)
+                return 
+             }
+            result( BrrmChat.shared.isBrrmChatNotification(userInfo: args))
            
         default:
             result(FlutterMethodNotImplemented)
@@ -60,4 +66,5 @@ enum Methods: String {
     case OPEN_CHAT = "openChat"
     case SET_FCM_TOKEN = "setFCMToken"
     case NOTIFICATION_RECEIVED = "notificationReceived"
+    case IS_BRRM_CHAT_MESSAGE = "isBrrmChatMessage"
 }
