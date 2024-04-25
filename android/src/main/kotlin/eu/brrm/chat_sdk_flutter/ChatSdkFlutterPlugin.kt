@@ -115,14 +115,11 @@ class ChatSdkFlutterPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun init(call: MethodCall, result: Result) {
-        context?.let {
-            val appToken = call.argument<String>("appToken")
+        context?.let { ctx ->
+            val args = call.arguments as Map<*, *>
+            val appToken = args["appToken"] as? String
                 ?: throw IllegalArgumentException("AppToken must be provided")
-            BrrmChat.init(it, appToken)
-            BrrmChat.instance.apply {
-                setChatIconDrawable(android.R.drawable.ic_menu_info_details)
-                setChatIconColor(android.R.color.holo_orange_dark)
-            }
+            BrrmChat.init(ctx, appToken)
         }
         result.success(true)
     }

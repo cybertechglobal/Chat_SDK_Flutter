@@ -19,7 +19,9 @@ class BrrmChatPlugin extends ChatSdkFlutterPlatform {
 
   @override
   Future<dynamic> initChat(String appToken) {
-    return methodChannel.invokeMethod(Methods.initChat, {'appToken': appToken});
+    return methodChannel.invokeMethod(Methods.initChat, {
+      'appToken': appToken,
+    });
   }
 
   @override

@@ -50,8 +50,8 @@ android {
     }
 
     dependencies {
-        implementation("eu.brrm:chat-ui:1.0.0-SNAPSHOT")
-        //implementation 'eu.brrm:chat-sdk-android:1.0.8'
+        //implementation("eu.brrm:chat-ui:1.0.0-SNAPSHOT")
+        implementation("eu.brrm:chat-sdk-android:1.1.0")
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.11.0'
     }
