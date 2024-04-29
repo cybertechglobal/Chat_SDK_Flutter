@@ -22,43 +22,35 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
                 result(false)
                 return
             }
-            guard let user = args["user"] as? [String: Any] else {
+            guard let userMap = args["user"] as? [String: Any] else {
                 result(false)
                 return
             }
-            guard let group = args["group"] as? [String: Any] else {
+            guard let groupMap = args["group"] as? [String: Any] else {
                 result(false)
                 return
             }
-            let brrmUser = BrrmUser(from: user)
-            let brrmGroup = BrrmGroup(from: group)
-
-            BrrmChat.shared.register(user: chatUser, group: group)
-
-        case Methods.SET_USER.rawValue:
-            guard let args = call.arguments as? [String: Any] else { return }
-            guard let userId = args["id"] as? String,
-                  let email = args["email"] as? String,
-                  let name = args["name"] as? String else { return }
-            let chatUser = BrrmUser(id: userId, email: email, name: name)
-            BrrmChat.shared.setUser(user: chatUser)
-            result(true)
-        case Methods.SET_GROUP.rawValue:
-            guard let args = call.arguments as? [String: Any] else { return }
-            guard let groupId = args["id"] as? String,
-                  let chatName = args["name"] as? String else { return }
-            let group = BrrmGroup(id: groupId, name: chatName)
-            BrrmChat.shared.setGroup(group: group)
+            guard let brrmUser = BrrmUser(json: userMap), let brrmGroup = BrrmGroup(json: groupMap) else {
+                result(false)
+                return
+            }
+            BrrmChat.shared.register(user: brrmUser, group: brrmGroup)
             result(true)
         case Methods.OPEN_CHAT.rawValue:
             BrrmChat.shared.openChatList()
             result(true)
         case Methods.SET_FCM_TOKEN.rawValue:
-            guard let args = call.arguments as? [String: Any], let fcmToken = args["FCMToken"] as? String else { return }
+            guard let args = call.arguments as? [String: Any], let fcmToken = args["FCMToken"] as? String else {
+                result(false)
+                return
+            }
             BrrmChat.shared.setFMCToken(fmcToken: fcmToken)
             result(true)
         case Methods.HANDLE_BRRM_CHAT_MESSAGE.rawValue:
-            guard let args = call.arguments as? [String: Any] else { return }
+            guard let args = call.arguments as? [String: Any] else {
+                result(false)
+                return
+            }
             if BrrmChat.shared.isBrrmChatNotification(userInfo: args) {
                 BrrmChat.shared.notification(userInfo: args)
                 result(true)

@@ -1,5 +1,5 @@
 PODS:
-  - BrrmChatFramework (1.0.7)
+  - BrrmChatFramework (1.0.9)
   - chat_sdk_flutter (0.0.1):
     - BrrmChatFramework
     - Flutter
@@ -107,7 +107,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
-  BrrmChatFramework: 1bfa9739ce62b38f85f2e3e5f8413afca2afe678
+  BrrmChatFramework: 1fcd79a62fc2a1b72167c2999adaf8fb898001d2
   chat_sdk_flutter: 3f693ba050ce173473bd3a4213e852ce74d200a2
   Firebase: 91fefd38712feb9186ea8996af6cbdef41473442
   firebase_core: 7f1e1156934d0da3be260174812842df9420e4ab
