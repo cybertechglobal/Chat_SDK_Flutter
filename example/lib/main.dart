@@ -18,7 +18,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   debugPrint('Message received: ${message.data}');
-  await BrrmChatPlugin().notificationReceived(message.data);
+  await BrrmChatPlugin().handleBrrmChatMessage(message.data);
 }
 
 Future<void> main() async {
@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     //Handler for receiving push message while application is in a foreground/background state
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint('Message received: ${message.data}');
-      widget.chatPlugin.notificationReceived(message.data);
+      widget.chatPlugin.handleBrrmChatMessage(message.data);
     });
 
     // Handler for receiving push message while application is in a quit state
@@ -73,11 +73,10 @@ class _MyAppState extends State<MyApp> {
         id: '10eb325e-1299-4901-96ca-a6e7fb235cbd',
         email: 'ios@myauto.com',
         name: 'IOS');
-    widget.chatPlugin.setUser(user);
 
     BrrmGroup group = BrrmGroup(
         id: 'e92d4539-25ca-4a19-b0fc-34d6e9ba08d8', name: 'CHAT TEST');
-    widget.chatPlugin.setGroup(group);
+    widget.chatPlugin.register(user, group);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.

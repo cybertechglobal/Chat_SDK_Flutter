@@ -25,16 +25,6 @@ class BrrmChatPlugin extends ChatSdkFlutterPlatform {
   }
 
   @override
-  Future<dynamic> setUser(BrrmUser user) {
-    return methodChannel.invokeMethod(Methods.setUser, user.toJson());
-  }
-
-  @override
-  Future<dynamic> setGroup(BrrmGroup group) {
-    return methodChannel.invokeMethod(Methods.setGroup, group.toJson());
-  }
-
-  @override
   Future<dynamic> openChat() {
     return methodChannel.invokeMethod(Methods.openChat);
   }
@@ -46,13 +36,6 @@ class BrrmChatPlugin extends ChatSdkFlutterPlatform {
   }
 
   @override
-  Future<dynamic> notificationReceived(Map<dynamic, dynamic> notification) {
-    // Meni na se ne prikazuje notifikacija ne znam iz kog razloga iako tu notifikaciju pravim u sam framework a metoda se poziva...
-    return methodChannel.invokeMethod(
-        Methods.notificationReceived, notification);
-  }
-
-  @override
   Future<dynamic> handleBrrmChatMessage(Map<dynamic, dynamic> data) {
     return methodChannel.invokeMethod(Methods.handleBrrmChatMessage, data);
   }
@@ -60,5 +43,14 @@ class BrrmChatPlugin extends ChatSdkFlutterPlatform {
   @override
   Future<dynamic> isBrrmChatMessage(Map<dynamic, dynamic> data) async {
     return methodChannel.invokeMethod(Methods.isBrrmChatMessage, data);
+  }
+
+  @override
+  Future register(BrrmUser user, BrrmGroup group) {
+    Map<dynamic, dynamic> data = {
+      'user': user.toJson(),
+      'group': group.toJson()
+    };
+    return methodChannel.invokeMethod(Methods.register, data);
   }
 }

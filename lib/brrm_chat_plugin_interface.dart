@@ -29,15 +29,11 @@ abstract class ChatSdkFlutterPlatform extends PlatformInterface {
 
   Future<dynamic> initChat(String appToken);
 
-  Future<dynamic> setUser(BrrmUser user);
-
-  Future<dynamic> setGroup(BrrmGroup group);
+  Future<dynamic> register(BrrmUser user, BrrmGroup group);
 
   Future<dynamic> openChat();
 
   Future<dynamic> setFCMToken(String fcmToken);
-
-  Future<dynamic> notificationReceived(Map<dynamic, dynamic> notification);
 
   Future<dynamic> isBrrmChatMessage(Map<dynamic, dynamic> data);
 

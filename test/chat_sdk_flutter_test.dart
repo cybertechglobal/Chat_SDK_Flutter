@@ -22,22 +22,7 @@ class MockChatSdkFlutterPlatform
   }
 
   @override
-  Future setGroup(BrrmGroup group) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future setUser(BrrmUser user) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future setFCMToken(String fmcToken) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future notificationReceived(Map<dynamic, dynamic> notification) {
     throw UnimplementedError();
   }
 
@@ -48,6 +33,11 @@ class MockChatSdkFlutterPlatform
 
   @override
   Future isBrrmChatMessage(Map<dynamic, dynamic> data) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future register(BrrmUser user, BrrmGroup group) {
     throw UnimplementedError();
   }
 }
