@@ -30,7 +30,7 @@ class BrrmChatPlugin extends ChatSdkFlutterPlatform {
   }
 
   @override
-  Future<dynamic> setFCMToken(String fcmToken) {
+  Future<dynamic> setFCMToken(String? fcmToken) {
     return methodChannel
         .invokeMethod(Methods.setFCMToken, {'FCMToken': fcmToken});
   }
@@ -46,10 +46,11 @@ class BrrmChatPlugin extends ChatSdkFlutterPlatform {
   }
 
   @override
-  Future register(BrrmUser user, BrrmGroup group) {
+  Future register(BrrmUser user, BrrmGroup group, [String? token]) {
     Map<dynamic, dynamic> data = {
       'user': user.toJson(),
-      'group': group.toJson()
+      'group': group.toJson(),
+      "FCMToken": token
     };
     return methodChannel.invokeMethod(Methods.register, data);
   }

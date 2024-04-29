@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   }
 
-  Future<void> setupChatData() async {
+  Future<dynamic> setupChatData() async {
     BrrmUser user = BrrmUser(
         id: '10eb325e-1299-4901-96ca-a6e7fb235cbd',
         email: 'ios@myauto.com',
@@ -76,7 +76,8 @@ class _MyAppState extends State<MyApp> {
 
     BrrmGroup group = BrrmGroup(
         id: 'e92d4539-25ca-4a19-b0fc-34d6e9ba08d8', name: 'CHAT TEST');
-    widget.chatPlugin.register(user, group);
+    final token = await FirebaseMessaging.instance.getToken();
+    await widget.chatPlugin.register(user, group, token);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -109,15 +110,27 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-            child: TextButton(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          ),
-          onPressed: () async {
-            await setupChatData();
-            await widget.chatPlugin.openChat();
-          },
-          child: const Text('Open Chat'),
+            child: Column(
+          children: [
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              ),
+              onPressed: () async {
+                await setupChatData();
+              },
+              child: const Text('Setup Chat Data'),
+            ),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              ),
+              onPressed: () async {
+                await widget.chatPlugin.openChat();
+              },
+              child: const Text('Open Chat'),
+            ),
+          ],
         )),
       ),
     );

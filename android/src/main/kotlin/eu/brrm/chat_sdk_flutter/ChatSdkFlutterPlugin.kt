@@ -45,24 +45,15 @@ class ChatSdkFlutterPlugin : FlutterPlugin, MethodCallHandler {
                 setFcmToken(call, result)
             }
 
-            Methods.SET_GROUP -> {
-                setGroup(call, result)
-            }
-
-            Methods.SET_USER -> {
-                setUser(call, result)
+            Methods.REGISTER -> {
+                register(call, result)
             }
 
             Methods.IS_BRRM_CHAT_MESSAGE -> {
                 isBrrmChatMessage(call, result)
-                result.success(true)
             }
 
             Methods.HANDLE_BRRM_CHAT_MESSAGE -> {
-                handleBrrmChatMessage(call, result)
-            }
-
-            Methods.NOTIFICATION_RECEIVED -> {
                 handleBrrmChatMessage(call, result)
             }
 
@@ -87,30 +78,23 @@ class ChatSdkFlutterPlugin : FlutterPlugin, MethodCallHandler {
         result.success(isBrrmChatMessage)
     }
 
-    private fun setUser(call: MethodCall, result: Result) {
-        val args = call.arguments as? Map<*, *>
-        val user = args?.let { BrrmUser.fromJSON(JSONObject(it)) }
-        user?.let {
-            BrrmChat.instance.setUser(it)
+    private fun register(call: MethodCall, result: Result) {
+        val user = call.argument<Map<*, *>>("user")?.let { BrrmUser.fromJSON(JSONObject(it)) }
+        val group = call.argument<Map<*, *>>("group")?.let { BrrmGroup.fromJSON(JSONObject(it)) }
+        val fcmToken = call.argument<String>("FCMToken")
+        if (user != null && group != null) {
+            BrrmChat.instance.register(user, group, fcmToken) {
+                result.success(it)
+            }
         }
-        result.success(true)
-    }
-
-    private fun setGroup(call: MethodCall, result: Result) {
-        val args = call.arguments as? Map<*, *>
-        val group = args?.let { BrrmGroup.fromJSON(JSONObject(it)) }
-        group?.let {
-            BrrmChat.instance.setGroup(it)
-        }
-        result.success(true)
     }
 
     private fun setFcmToken(call: MethodCall, result: Result) {
-        val token = call.argument<String>("FCMToken")
-        token?.let {
-            BrrmChat.instance.onNewToken(it)
+        call.argument<String>("FCMToken")?.let { token ->
+            BrrmChat.instance.subscribeDevice(token) {
+                result.success(it)
+            }
         }
-        result.success(true)
     }
 
     private fun init(call: MethodCall, result: Result) {
