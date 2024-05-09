@@ -34,7 +34,10 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
                 result(false)
                 return
             }
-            BrrmChat.shared.register(user: brrmUser, group: brrmGroup)
+            
+            let fcmToken = args["FCMToken"]
+
+            BrrmChat.shared.register(user: brrmUser, group: brrmGroup,fcmToken:fcmToken)
             result(true)
         case Methods.OPEN_CHAT.rawValue:
             BrrmChat.shared.openChatList()
