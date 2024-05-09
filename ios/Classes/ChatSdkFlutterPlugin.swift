@@ -35,7 +35,7 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
                 return
             }
             
-            let fcmToken = args["FCMToken"]
+            let fcmToken = args["FCMToken"] as? String
 
             BrrmChat.shared.register(user: brrmUser, group: brrmGroup,fcmToken:fcmToken)
             result(true)
@@ -47,7 +47,7 @@ public class ChatSdkFlutterPlugin: NSObject, FlutterPlugin {
                 result(false)
                 return
             }
-            BrrmChat.shared.setFMCToken(fmcToken: fcmToken)
+            BrrmChat.shared.setFMCToken(fcmToken: fcmToken)
             result(true)
         case Methods.HANDLE_BRRM_CHAT_MESSAGE.rawValue:
             guard let args = call.arguments as? [String: Any] else {
