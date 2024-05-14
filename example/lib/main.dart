@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 const String appToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiMTg2MjQxLWQ2YzktNDdmZS05NWZiLTEyYmJiOTE3ZjkwYiIsImlhdCI6MTY5OTUyOTE5MX0.KGfgNuJADwDh_ODeEIPnE-HSxNCuEpeDrtNEs9yBHQw';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0Y2ZlMGEzLWJkMzctNDAxOC05NWVmLTA5MDI1ZDQyYTQ4MiIsImlhdCI6MTcxNTY4NjY5MH0.yLOfmxVV3Tkh4PPjZsC8IDF4TJBBRFtrXvXd4W3IXTY';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -70,12 +70,12 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> setupChatData() async {
     BrrmUser user = BrrmUser(
-        id: '10eb325e-1299-4901-96ca-a6e7fb235cbd',
-        email: 'ios@myauto.com',
-        name: 'IOS');
+        id: 'e19af7c9-bb04-4dc0-bc78-551acc36f218',
+        email: 'sekiprod@user.com',
+        name: 'Semsudin Tafilovic');
 
     BrrmGroup group = BrrmGroup(
-        id: 'e92d4539-25ca-4a19-b0fc-34d6e9ba08d8', name: 'CHAT TEST');
+        id: '1c0f2e00-6ae7-48a1-a1df-62c5e3138ad3', name: 'TEST DEALERSHIP');
     final token = await FirebaseMessaging.instance.getToken();
     await widget.chatPlugin.register(user, group, token);
   }
