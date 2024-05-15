@@ -1,5 +1,6 @@
 import 'package:chat_sdk_flutter/models/brrm_group.dart';
 import 'package:chat_sdk_flutter/models/brrm_user.dart';
+import 'package:chat_sdk_flutter/models/chat_environment.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -18,10 +19,10 @@ class BrrmChatPlugin extends ChatSdkFlutterPlatform {
   }
 
   @override
-  Future<dynamic> initChat(String appToken) {
-    return methodChannel.invokeMethod(Methods.initChat, {
-      'appToken': appToken,
-    });
+  Future<dynamic> initChat(String appToken,
+      [ChatEnvironment? chatEnvironment]) {
+    return methodChannel.invokeMethod(Methods.initChat,
+        {'appToken': appToken, 'chatEnv': chatEnvironment?.index});
   }
 
   @override

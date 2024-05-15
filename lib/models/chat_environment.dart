@@ -1,0 +1,4 @@
+enum ChatEnvironment {
+  production,
+  development;
+}

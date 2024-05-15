@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:chat_sdk_flutter/brrm_chat_plugin.dart';
 import 'package:chat_sdk_flutter/models/brrm_group.dart';
 import 'package:chat_sdk_flutter/models/brrm_user.dart';
+import 'package:chat_sdk_flutter/models/chat_environment.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +25,11 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
-
   final chatPlugin = BrrmChatPlugin();
 
-  chatPlugin.initChat(appToken);
+  await Firebase.initializeApp();
+
+  await chatPlugin.initChat(appToken, ChatEnvironment.production);
 
   final fcmToken = await FirebaseMessaging.instance.getToken();
   if (fcmToken != null) {

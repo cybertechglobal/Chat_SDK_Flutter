@@ -2,6 +2,7 @@ package eu.brrm.chat_sdk_flutter
 
 import android.content.Context
 import eu.brrm.chatui.BrrmChat
+import eu.brrm.chatui.internal.ChatEnvironment
 import eu.brrm.chatui.internal.data.BrrmGroup
 import eu.brrm.chatui.internal.data.BrrmUser
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -102,7 +103,10 @@ class ChatSdkFlutterPlugin : FlutterPlugin, MethodCallHandler {
             val args = call.arguments as Map<*, *>
             val appToken = args["appToken"] as? String
                 ?: throw IllegalArgumentException("AppToken must be provided")
-            BrrmChat.init(ctx, appToken)
+            val chatEnv = (args["chatEnv"] as? Int).let {
+                ChatEnvironment.entries[it ?: 0]
+            }
+            BrrmChat.init(ctx, appToken, chatEnv)
         }
         result.success(true)
     }
